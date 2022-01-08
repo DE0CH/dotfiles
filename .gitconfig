@@ -3,3 +3,8 @@
 [user]
 	name = Deyao Chen
 	email = chendeyao000@gmail.com
+	signingkey = 5C1210F324AEB22F
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
