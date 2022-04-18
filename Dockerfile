@@ -4,6 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --fix-missing
 RUN apt-get install -y \
     ubuntu-server \
+    build-essentials \
     zsh 
 
 ARG UNAME=ubuntu
