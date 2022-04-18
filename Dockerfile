@@ -26,10 +26,11 @@ COPY .p10k.zsh .p10k.zsh
 COPY setup.sh setup.sh
 RUN ./setup.sh 
 
-ENV HOMEBREW_PREFIX="/home/ubuntu/.linuxbrew";
-ENV HOMEBREW_CELLAR="/home/ubuntu/.linuxbrew/Cellar";
-ENV HOMEBREW_REPOSITORY="/home/ubuntu/.linuxbrew";
-ENV PATH="/home/ubuntu/.linuxbrew/bin:/home/ubuntu/.linuxbrew/sbin${PATH+:$PATH}";
-ENV MANPATH="/home/ubuntu/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
-ENV INFOPATH="/home/ubuntu/.linuxbrew/share/info:${INFOPATH:-}";
+ENV HOMEBREW_PREFIX="/home/ubuntu/.linuxbrew"
+ENV HOMEBREW_CELLAR="/home/ubuntu/.linuxbrew/Cellar"
+ENV HOMEBREW_REPOSITORY="/home/ubuntu/.linuxbrew"
+ENV PATH="/home/ubuntu/.linuxbrew/bin:/home/ubuntu/.linuxbrew/sbin:${PATH}"
+ENV MANPATH="/home/ubuntu/.linuxbrew/share/man:${MANPATH}:"
+ENV INFOPATH="/home/ubuntu/.linuxbrew/share/info:${INFOPATH}"
+
 RUN brew install gcc
