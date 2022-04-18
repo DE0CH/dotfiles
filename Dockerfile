@@ -24,4 +24,4 @@ RUN echo 'eval "$(/home/${UNAME}/.linuxbrew/bin/brew shellenv)"' >> .profile
 COPY .zshrc .zshrc
 COPY .p10k.zsh .p10k.zsh
 COPY setup.sh setup.sh
-RUN setup.sh 
+RUN ./setup.sh 
