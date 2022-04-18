@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --fix-missing
 RUN apt-get install -y \
     ubuntu-server \
-    build-essentials \
+    build-essential \
     zsh 
 
 ARG UNAME=ubuntu
@@ -26,7 +26,6 @@ ENV HOMEBREW_REPOSITORY="/home/${UNAME}/.linuxbrew"
 ENV PATH="/home/${UNAME}/.linuxbrew/bin:/home/${UNAME}/.linuxbrew/sbin:${PATH}"
 ENV MANPATH="/home/${UNAME}/.linuxbrew/share/man:${MANPATH}:"
 ENV INFOPATH="/home/${UNAME}/.linuxbrew/share/info:${INFOPATH}"
-RUN brew install gcc
 
 COPY .zshrc .zshrc
 COPY .p10k.zsh .p10k.zsh
