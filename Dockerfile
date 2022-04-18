@@ -19,18 +19,17 @@ WORKDIR /home/${UNAME}
 RUN git clone https://github.com/Homebrew/brew .linuxbrew
 RUN .linuxbrew/bin/brew update --force --quiet
 ENV PATH="/home/${UNAME}/.linuxbrew/bin:${PATH}"
-RUN echo 'eval "$(/home/${UNAME}/.linuxbrew/bin/brew shellenv)"' >> .profile
+ENV HOMEBREW_PREFIX="/home/${UNAME}/.linuxbrew"
+ENV HOMEBREW_CELLAR="/home/${UNAME}/.linuxbrew/Cellar"
+ENV HOMEBREW_REPOSITORY="/home/${UNAME}/.linuxbrew"
+ENV PATH="/home/${UNAME}/.linuxbrew/bin:/home/${UNAME}/.linuxbrew/sbin:${PATH}"
+ENV MANPATH="/home/${UNAME}/.linuxbrew/share/man:${MANPATH}:"
+ENV INFOPATH="/home/${UNAME}/.linuxbrew/share/info:${INFOPATH}"
+RUN brew install gcc
 
 COPY .zshrc .zshrc
 COPY .p10k.zsh .p10k.zsh
 COPY setup.sh setup.sh
 RUN ./setup.sh 
 
-ENV HOMEBREW_PREFIX="/home/ubuntu/.linuxbrew"
-ENV HOMEBREW_CELLAR="/home/ubuntu/.linuxbrew/Cellar"
-ENV HOMEBREW_REPOSITORY="/home/ubuntu/.linuxbrew"
-ENV PATH="/home/ubuntu/.linuxbrew/bin:/home/ubuntu/.linuxbrew/sbin:${PATH}"
-ENV MANPATH="/home/ubuntu/.linuxbrew/share/man:${MANPATH}:"
-ENV INFOPATH="/home/ubuntu/.linuxbrew/share/info:${INFOPATH}"
 
-RUN brew install gcc
