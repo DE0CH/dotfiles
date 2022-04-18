@@ -1,7 +1,7 @@
 ARG VERSION=focal
 FROM ubuntu:${VERSION}
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
+RUN apt-get update --fix-missing
 RUN apt-get install -y \
     ubuntu-server \
     zsh 
