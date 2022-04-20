@@ -32,4 +32,11 @@ COPY .p10k.zsh .p10k.zsh
 COPY setup.sh setup.sh
 RUN ./setup.sh 
 
+USER root
+RUN rm -rf /etc/sudoers
+RUN apt-get install -y sudo 
+RUN echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
+RUN yes | unminimize 
+RUN apt-get install -y man 
+USER $UNAME
 
