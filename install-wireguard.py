@@ -51,7 +51,7 @@ default_interface = default_interface_l[default_interface_l.index("dev") + 1].st
 with open('/etc/wireguard/wg0.conf', 'w') as f:
     f.write(f"""[Interface]
 PrivateKey = {private_key}
-Address = {args.ip}
+Address = {args.ip}/24
 ListenPort = {args.port}
 SaveConfig = true
 
