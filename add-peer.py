@@ -6,8 +6,6 @@ import sys
 import argparse
 import pathlib
 
-from boto import config
-
 parser = argparse.ArgumentParser("Add Wireguard Peer")
 parser.add_argument("-t", "--interface", default="wg1")
 parser.add_argument('--pk', required=True, help="The public key of the interface")
