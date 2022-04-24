@@ -26,8 +26,8 @@ r('apt-get install -y wireguard')
 p = r('wg genkey', capture_output=True)
 private_key = p.stdout.decode('utf-8').strip()
 
-with open('/etc/wireguard/private.key') as f:
-    private_key = f.read().strip()
+with open('/etc/wireguard/private.key', 'w') as f:
+    f.write(private_key + '\n')
 
 r('chmod go= /etc/wireguard/private.key')
 r('wg genkey', input=private_key.encode('utf-8'))
@@ -43,7 +43,7 @@ p = r('ip route list default', capture_output=True)
 default_interface_l = p.stdout.decode('utf-8').split()
 default_interface = default_interface_l[default_interface_l.index("dev") + 1].strip()
 
-with open('/etc/wireguard/wg0.conf') as f:
+with open('/etc/wireguard/wg0.conf', 'w') as f:
     f.write(f"""[Interface]
 PrivateKey = {private_key}
 Address = {args.ip}
