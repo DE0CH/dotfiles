@@ -36,8 +36,9 @@ public_key = p.stdout.decode('utf-8').strip()
 with open('/etc/wireguard/public.key', 'w') as f:
     f.write(public_key + '\n')
 
-with open('/etc/sysctl.conf', 'a') as f:
-    f.write('net.ipv4.ip_forward=1\n')
+with open('/etc/sysctl.conf', 'ra') as f:
+    if ('net.ipv4.ip_forward=1' not in f.read()):
+        f.write('net.ipv4.ip_forward=1\n')
 
 r('sysctl -p')
 p = r('ip route list default', capture_output=True)
