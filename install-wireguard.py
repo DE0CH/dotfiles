@@ -33,7 +33,7 @@ r('chmod go= /etc/wireguard/private.key')
 p = r('wg genkey', input=private_key.encode('utf-8'), capture_output=True)
 public_key = p.stdout.decode('utf-8').strip()
 
-with open('/etc/wireguard/public.key') as f:
+with open('/etc/wireguard/public.key', 'w') as f:
     f.write(public_key + '\n')
 
 with open('/etc/sysctl.conf', 'a') as f:
