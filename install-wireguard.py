@@ -6,7 +6,7 @@ import sys
 import argparse
 
 parser = argparse.ArgumentParser("Install Wireguard")
-parser.add_argument("ip", default="10.8.0.1")
+parser.add_argument("--ip", default="10.8.0.1")
 parser.add_argument("-p", "--port", help="The port used for wireguard, default to 51820", type=int, default=51820)
 args = parser.parse_args()
 
