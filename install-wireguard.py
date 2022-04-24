@@ -47,6 +47,8 @@ r('sysctl -p')
 p = r('ip route list default', capture_output=True)
 default_interface_l = p.stdout.decode('utf-8').split()
 default_interface = default_interface_l[default_interface_l.index("dev") + 1].strip()
+r('systemctl stop wg-quick@wg0.service')
+r('systemctl disable wg-quick@wg0.service')
 
 with open('/etc/wireguard/wg0.conf', 'w') as f:
     f.write(f"""[Interface]
@@ -67,9 +69,9 @@ r(f'ufw allow {args.port}/udp')
 r('ufw allow OpenSSH')
 r('ufw disable')
 r('yes | ufw enable')
-# r('systemctl stop wg-quick@wg0.service')
-# r('systemctl enable wg-quick@wg0.service')
-# r('systemctl start wg-quick@wg0.service')
+
+r('systemctl enable wg-quick@wg0.service')
+r('systemctl start wg-quick@wg0.service')
 
 print("Done, your public key is")
 print(public_key)
