@@ -4,6 +4,7 @@ import subprocess
 import os 
 import sys
 import argparse
+import ipaddress
 
 parser = argparse.ArgumentParser("Install Wireguard")
 parser.add_argument("--ip", default="10.8.0.1")
@@ -73,5 +74,6 @@ r('yes | ufw enable')
 r('systemctl enable wg-quick@wg0.service')
 r('systemctl start wg-quick@wg0.service')
 
-print("Done, your public key is")
-print(public_key)
+ip_network = ipaddress.ip_address(args.ip+"/24")
+print(ip_network.hosts()[1])
+
