@@ -12,7 +12,6 @@ parser.add_argument('--pk', required=True, help="The public key of the interface
 parser.add_argument('--ip', required=True, help="The ip address of peer")
 parser.add_argument('--ep', required=True, help="The endpoint of the peer")
 args = parser.parse_args()
-print(args.public_key)
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
