@@ -40,7 +40,7 @@ p = r('ip route list table main default', capture_output=True)
 default_route = p.stdout.decode('utf-8').strip().split()
 gateway_ip = default_route[default_route.index('dev')-1].strip()
 gateway_device = default_route[default_route.index('dev')+1].strip()
-p = r(f'ip -brief address show {gateway_device}', capture_ouput=True)
+p = r(f'ip -brief address show {gateway_device}', capture_output=True)
 default_device_addresses = p.stdout.decode('utf-8').strip().split()
 default_device_ip = default_device_addresses[2][:default_device_addresses[2].index('/')].strip()
 
