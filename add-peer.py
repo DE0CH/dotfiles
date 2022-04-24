@@ -23,7 +23,7 @@ if (os.getuid() != 0):
     eprint("Please run this script as root")
     exit(1)
 
-if pathlib.Path('/etc/wireguard/private.key').is_file:
+if pathlib.Path('/etc/wireguard/private.key').is_file():
     with open('/etc/wireguard/private.key', 'r') as f:
         private_key = f.read().strip()
 else:
