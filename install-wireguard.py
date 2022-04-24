@@ -3,7 +3,6 @@
 import subprocess 
 import os 
 import sys
-from sympy import public
 import argparse
 
 parser = argparse.ArgumentParser("Install Wireguard")
