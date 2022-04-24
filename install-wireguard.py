@@ -62,7 +62,7 @@ PreDown = ip6tables -t nat -D POSTROUTING -o {default_interface} -j MASQUERADE
 r(f'ufw allow {args.port}/udp')
 r('ufw allow OpenSSH')
 r('ufw disable')
-r('ufw enable')
+r('yes | ufw enable')
 r('systemctl enable wg-quick@wg0.service')
 r('systemctl start wg-quick@wg0.service')
 
