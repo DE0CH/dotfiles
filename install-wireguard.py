@@ -23,7 +23,9 @@ if (os.getuid() != 0):
 
 r('apt-get update')
 r('apt-get install -y wireguard')
-r('wg genkey')
+p = r('wg genkey', capture_output=True)
+private_key = p.stdout.decode('utf-8').strip()
+
 with open('/etc/wireguard/private.key') as f:
     private_key = f.read().strip()
 
@@ -37,7 +39,7 @@ with open('/etc/sysctl.conf', 'a') as f:
     f.write('net.ipv4.ip_forward=1\n')
 
 r('sysctl -p')
-p = r('ip route list default')
+p = r('ip route list default', capture_output=True)
 default_interface_l = p.stdout.decode('utf-8').split()
 default_interface = default_interface_l[default_interface_l.index("dev") + 1].strip()
 
