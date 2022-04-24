@@ -75,5 +75,5 @@ r('systemctl enable wg-quick@wg0.service')
 r('systemctl start wg-quick@wg0.service')
 
 ip_network = ipaddress.ip_network((args.ip+"/24"), strict=False)
-print(ip_network.hosts()[1])
+print(ip_network[2])
 
