@@ -40,30 +40,4 @@ fi
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
 
-cd ${HOME}
-rm -rf .ssh
-ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
-rm -rf .gnupg
-mkdir .gnupg 
-chmod 700 .gnupg
-mkdir -p .gnupg/private-keys-v1.d
-
-cat <<EOT >> .gnupg/gen-key-script
-Key-Type: 1
-Key-Length: 2048
-Subkey-Type: 1
-Subkey-Length: 2048
-Name-Real: Deyao Chen
-Name-Email: chendeyao000@gmail.com
-Expire-Date: 0
-EOT
-gpg --batch --gen-key .gnupg/gen-key-script
-
-
-DIR=${PWD}
-cd ${HOME}
-REL=$(realpath --relative-to="${HOME}" "${DIR}")
-ln -s ${DIR}/.zshrc .zshrc
-ln -s ${DIR}/.p10k.zsh .p10k.zsh
-
 brew install R python3

@@ -5,6 +5,7 @@ import os
 import sys
 import argparse
 import ipaddress
+import requests
 
 parser = argparse.ArgumentParser("Install Wireguard")
 parser.add_argument("--ip", default="10.8.0.1")
@@ -77,9 +78,15 @@ r('systemctl start wg-quick@wg0.service')
 ip_network = ipaddress.ip_network((args.ip+"/24"), strict=False)
 
 i = 0
+peer_ip = None
 for ip in ip_network:
     if i != 0 and str(ip).strip() != args.ip.strip():
-        print(ip)
+        peer_ip = ip
         break
     i += 1
 
+assert peer_ip != None
+public_ip = requests.get('https://api.ipify.org').content.decode('utf8')
+
+print("Done. Please, on peer, run")
+print(f"./add-peer.py --ip {peer_ip} --pk {public_key} --ep {public_ip}:{args.port}")
