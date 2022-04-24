@@ -9,7 +9,7 @@ done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 echo $DIR
 
-curl https://github.com/DE0CH.keys >> ~/.ssh/authorized_keys
+curl https://github.com/DE0CH.keys >> ${HOME}/authorized_keys
 
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
