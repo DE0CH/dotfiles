@@ -79,6 +79,7 @@ ip_network = ipaddress.ip_network((args.ip+"/24"), strict=False)
 i = 0
 for ip in ip_network:
     if i != 0 and ip != args.ip:
-        print(ip_network[2])
+        print(ip)
+        break
     i += 1
 
