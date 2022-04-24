@@ -61,3 +61,11 @@ PublicKey = {args.pk}
 AllowedIPs = 0.0.0.0/0
 Endpoint = {args.ep}
 """)
+
+r(f'systemctl disable wg-quick@{args.interface}')
+r(f'systemctl stop wg-quick@{args.interface}')
+r(f'systemctl enable wg-quick@{args.interface}')
+r(f'systemctl start wg-quick@{args.interface}')
+
+print("Done, please add peer to server")
+print(f"sudo wg set wg0 peer {public_key} allowed-ips {args.ip}")

@@ -10,6 +10,7 @@ import requests
 parser = argparse.ArgumentParser("Install Wireguard")
 parser.add_argument("--ip", default="10.8.0.1")
 parser.add_argument("-p", "--port", help="The port used for wireguard, default to 51820", type=int, default=51820)
+parser.add_argument("-t", "--interface", help="The interface for forwarding traffic", default=None)
 args = parser.parse_args()
 
 def eprint(*args, **kwargs):
@@ -47,8 +48,11 @@ if ip_forward:
 
 r('sysctl -p')
 p = r('ip route list default', capture_output=True)
-default_interface_l = p.stdout.decode('utf-8').split()
-default_interface = default_interface_l[default_interface_l.index("dev") + 1].strip()
+if args.interface is None:
+    default_interface_l = p.stdout.decode('utf-8').split()
+    default_interface = default_interface_l[default_interface_l.index("dev") + 1].strip()
+else:
+    default_interface = args.interface
 r('systemctl stop wg-quick@wg0.service')
 r('systemctl disable wg-quick@wg0.service')
 
