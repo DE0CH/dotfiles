@@ -30,7 +30,7 @@ with open('/etc/wireguard/private.key', 'w') as f:
     f.write(private_key + '\n')
 
 r('chmod go= /etc/wireguard/private.key')
-p = r('wg genkey', input=private_key.encode('utf-8'), capture_output=True)
+p = r('wg pubkey', input=private_key.encode('utf-8'), capture_output=True)
 public_key = p.stdout.decode('utf-8').strip()
 
 with open('/etc/wireguard/public.key', 'w') as f:
