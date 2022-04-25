@@ -90,11 +90,7 @@ for ip in ip_network:
     i += 1
 
 assert peer_ip != None
-if default_interface.strip():
-    p = subprocess.run(f'curl --interface {default_interface} https://api.ipify.org', capture_output=True)
-    public_ip = p.stdout.decode('utf-8').strip()
-else:
-    public_ip = requests.get('https://api.ipify.org').content.decode('utf8')
+public_ip = requests.get('https://api.ipify.org').content.decode('utf8')
 
 print("Done. Please, on peer, run")
 print(f"./add-peer.py --ip {peer_ip} --pk {public_key} --ep {public_ip}:{args.port}")
