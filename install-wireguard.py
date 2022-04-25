@@ -90,7 +90,7 @@ for ip in ip_network:
     i += 1
 
 assert peer_ip != None
-if args.c is None:
+if default_interface.strip():
     p = subprocess.run(f'curl --interface {default_interface} https://api.ipify.org', capture_output=True)
     public_ip = p.stdout.decode('utf-8').strip()
 else:
