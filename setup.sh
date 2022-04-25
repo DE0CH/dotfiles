@@ -26,6 +26,3 @@ if [ -f "${HOME}/.zshrc" ]; then
 fi
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
-
-systemctl stop ssh
-systemctl start ssh
