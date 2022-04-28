@@ -8,6 +8,8 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
+test -n "$ZSH_VERSION" || (command -v apt-get && apt-get update && apt-get install -y zsh && chsh -s $(which zsh) $(whoami))
+
 curl https://github.com/DE0CH.keys >> ${HOME}/.ssh/authorized_keys
 
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
