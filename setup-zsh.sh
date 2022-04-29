@@ -43,9 +43,7 @@ backup ${HOME}/.ssh/id_ras.pub
 
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
-cp ${DIR}/.gitconfig .gitconfig
+ln -s ${DIR}/.gitconfig .gitconfig
 
 cd ${DIR}/.ssh
 ln -s ../${DIR}/.ssh/config config 
-
-ssh-keygen -b 2048 -t rsa -f ${HOME}/.ssh/id_ras -q -N ""

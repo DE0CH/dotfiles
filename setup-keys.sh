@@ -12,3 +12,6 @@ DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 curl https://github.com/DE0CH.keys > ${HOME}/.ssh/authorized_keys
 
 gpg --batch --gen-key ${DIR}/gen-key-script
+ssh-keygen -b 2048 -t rsa -f ${HOME}/.ssh/id_ras -q -N ""
+gpg --armor --export "Deyao Chen"
+cat ${HOME}/.ssh/id_ras.pub

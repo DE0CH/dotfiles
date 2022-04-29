@@ -1,7 +1,7 @@
 [user]
 	name = Deyao Chen
 	email = chendeyao000@gmail.com
-	signingkey = AAAAAAAAAAAAA
+	signingkey = Deyao Chen
 [commit]
 	gpgsign = true
 [gpg]
