@@ -8,9 +8,6 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
-test -n "$ZSH_VERSION" || (command -v apt-get && apt-get update && apt-get install -y zsh && chsh -s $(which zsh) $(whoami))
-
-curl https://github.com/DE0CH.keys >> ${HOME}/.ssh/authorized_keys
 
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -21,20 +18,34 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 
 cd ${HOME}
-REL=$(realpath --relative-to="${HOME}" "${DIR}")
-if [ -f "${HOME}/.zshrc" ]; then 
-    echo "~/.zshrc exists, moving it to ~/.zshrc.backup"
-    mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
-fi
 
-REL=$(realpath --relative-to="${HOME}" "${DIR}")
-if [ -f "${HOME}/.ssh/config" ]; then 
-    echo "~/.ssh/config exists, moving it to ~/.ssh/config.backup"
-    mv ${HOME}/.ssh/config ${HOME}/.ssh/config
-fi
+backup () {
+  FILE=$1
+  if [ -f "${FILE}" ]; then
+    BACKUP="${FILE}.backup"
+    while [ -f "${BACKUP}" ]; do
+      BACKUP="${BACKUP}.backup"
+    done
+    FILE_REL=$(realpath --relative-to="${HOME}" "${FILE}")
+    BACKUP_REL=$(realpath --relative-to="${HOME}" "${BACKUP}")
+    echo "~/${FILE_REL} exists, moving it to ~/${BACKUP_REL}"
+    mv ${FILE} ${BACKUP}
+  fi 
+}
+
+backup ${HOME}/.zshrc
+backup ${HOME}/.p10k.zsh
+backup ${HOME}/.ssh/config
+backup ${HOME}/.gitconfig
+backup ${HOME}/.ssh/id_rsa
+backup ${HOME}/.ssh/id_ras.pub
+
+
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
+cp ${DIR}/.gitconfig .gitconfig
 
 cd ${DIR}/.ssh
-
 ln -s ../${DIR}/.ssh/config config 
+
+ssh-keygen -b 2048 -t rsa -f ${HOME}/.ssh/id_ras -q -N ""

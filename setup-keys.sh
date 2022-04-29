@@ -8,13 +8,7 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
-source /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/STAOJ/sta-setup/master/setup.sh)"
 
-cd ${HOME}
-rm -f ${HOME}/.zshrc
-rm -f ${HOME}/.p10k.zsh
-ln -s ${DIR}/.zshrc ${HOME}/.zshrc
-ln -s ${DIR}/.p10k.zsh ${HOME}/.p10k.zsh
+curl https://github.com/DE0CH.keys > ${HOME}/.ssh/authorized_keys
 
-brew install R eython3
-brew install de0ch/irace/irace 
+gpg --batch --gen-key ${DIR}/gen-key-script

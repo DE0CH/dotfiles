@@ -1,6 +1,24 @@
 FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
+
+COPY sources.list sources.list
+COPY change-apt.sh change-apt.sh
+RUN ./change-apt.sh
+
 RUN apt-get update --fix-missing
-RUN apt-get install -y ubuntu-server 
-COPY setup.sh setup.sh
+RUN apt-get install -y ubuntu-server zsh
+
+
+
+ARG UNAME=ubuntu
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} ${UNAME}
+RUN useradd -m -u ${UID} -g ${GID} -s /bin/zsh ${UNAME}
+RUN echo "${UNAME} ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
+
+USER ubuntu
+RUN mkdir -p /home/${UNAME}/dotfiles
+WORKDIR /home/${UNAME}/dotfiles
+COPY . .
 RUN ./setup.sh
