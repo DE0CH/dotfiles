@@ -1,0 +1,10 @@
+[user]
+	name = Deyao Chen
+	email = chendeyao000@gmail.com
+	signingkey = AAAAAAAAAAAAA
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[pull]
+	rebase = true
