@@ -1,3 +1,5 @@
+# This seems to be borken, but considering that I am probably not going to use this, I will not fix the errors. 
+
 ARG VERSION=focal
 FROM ubuntu:${VERSION}
 ARG DEBIAN_FRONTEND=noninteractive

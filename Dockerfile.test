@@ -1,4 +1,6 @@
 FROM ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update --fix-missing
+RUN apt-get install -y ubuntu-server 
 COPY setup.sh setup.sh
 RUN ./setup.sh
