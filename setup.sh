@@ -26,5 +26,15 @@ if [ -f "${HOME}/.zshrc" ]; then
     echo "~/.zshrc exists, moving it to ~/.zshrc.backup"
     mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
 fi
+
+REL=$(realpath --relative-to="${HOME}" "${DIR}")
+if [ -f "${HOME}/.ssh/config" ]; then 
+    echo "~/.ssh/config exists, moving it to ~/.ssh/config.backup"
+    mv ${HOME}/.ssh/config ${HOME}/.ssh/config
+fi
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
+
+cd ${DIR}/.ssh
+
+ln -s ../${DIR}/.ssh/config config 
