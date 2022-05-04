@@ -21,7 +21,7 @@ cd ${HOME}
 
 backup () {
   FILE=$1
-  if [ -f "${FILE}" ]; then
+  if [ -e "${FILE}" ]; then
     BACKUP="${FILE}.backup"
     while [ -f "${BACKUP}" ]; do
       BACKUP="${BACKUP}.backup"
@@ -45,5 +45,6 @@ ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
 ln -s ${DIR}/.gitconfig .gitconfig
 
-cd ${DIR}/.ssh
-ln -s ../${DIR}/.ssh/config config 
+cd ${HOME}/.ssh
+REL=$(realpath --relative-to="${HOME}/.ssh" "${DIR}/.ssh")
+ln -s ${REL}/config config 
