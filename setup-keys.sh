@@ -24,7 +24,9 @@ backup () {
 
 backup ${HOME}/.ssh/authorized_keys
 backup ${HOME}/.ssh/id_rsa
+
 curl https://github.com/DE0CH.keys > ${HOME}/.ssh/authorized_keys
+chmod 700 ${HOME}/.ssh/authorized_keys
 
 gpg --batch --gen-key ${DIR}/gen-key-script
 ssh-keygen -b 2048 -t rsa -f ${HOME}/.ssh/id_rsa -q -N ""
