@@ -18,6 +18,6 @@ useradd -m deyaochen
 apt-get update && apt-get install -y zsh
 sudo chsh -s /bin/zsh deyaochen
 su - deyaochen -c "curl https://github.com/DE0CH.keys > /home/deyaochen/.ssh/authorized_keys"
+su - deyaochen -c "git clone https://github.com/DE0CH/dotfiles.git /home/deyaochen/dotfiles"
 
-
-${DIR}/setup-zsh.sh
+su deyaochen -s /home/deyaochen/dotfiles/setup-zsh.sh
