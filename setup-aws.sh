@@ -17,7 +17,10 @@ fi
 useradd -m deyaochen
 apt-get update && apt-get install -y zsh
 sudo chsh -s /bin/zsh deyaochen
+echo "deyaochen ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+test -d /home/deyaochen/.ssh || su - deyaochen -c "mkdir -p /home/deyaochen/.ssh"
 su - deyaochen -c "curl https://github.com/DE0CH.keys > /home/deyaochen/.ssh/authorized_keys"
 su - deyaochen -c "git clone https://github.com/DE0CH/dotfiles.git /home/deyaochen/dotfiles"
+usermod -aG sudo deyaochen
 
 su deyaochen -s /home/deyaochen/dotfiles/setup-zsh.sh
