@@ -21,5 +21,5 @@ instance_output = subprocess.check_output(['aws', 'ec2', 'describe-instances', '
 instance_output = json.loads(instance_output)
 public_dns = instance_output['Reservations'][0]['Instances'][0]['PublicDnsName']
 
-os.execvp('rsync', ['rsync', '-azP', f'deyaochen@{public_dns}:/home/deyaochen/{args.path}', os.path.join(os.getcwd(), args.path)])
+os.execvp('rsync', ['rsync', '-azP', os.path.join(os.getcwd(), args.path), f'deyaochen@{public_dns}:/home/deyaochen/{args.path}'])
 
