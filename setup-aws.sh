@@ -1,5 +1,6 @@
 #!/usr/bin/env bash 
 
+# sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/setup-aws.sh)"
 SOURCE=${BASH_SOURCE[0]}
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
@@ -16,7 +17,7 @@ fi
 
 useradd -m deyaochen
 apt-get update && apt-get install -y zsh
-sudo chsh -s /bin/zsh deyaochen
+chsh -s /bin/zsh deyaochen
 echo "deyaochen ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 test -d /home/deyaochen/.ssh || su - deyaochen -c "mkdir -p /home/deyaochen/.ssh"
 su - deyaochen -c "curl https://github.com/DE0CH.keys > /home/deyaochen/.ssh/authorized_keys"
