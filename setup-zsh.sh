@@ -35,9 +35,8 @@ backup () {
 
 backup ${HOME}/.zshrc
 backup ${HOME}/.p10k.zsh
-backup ${HOME}/.ssh/config
 backup ${HOME}/.gitconfig
-
+backup ${HOME}/.ssh/config
 
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
