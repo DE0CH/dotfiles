@@ -36,12 +36,7 @@ backup () {
 backup ${HOME}/.zshrc
 backup ${HOME}/.p10k.zsh
 backup ${HOME}/.gitconfig
-backup ${HOME}/.ssh/config
 
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
 ln -s ${DIR}/.gitconfig .gitconfig
-
-cd ${HOME}/.ssh
-REL=$(realpath --relative-to="${HOME}/.ssh" "${DIR}/.ssh")
-ln -s ${REL}/config config 
