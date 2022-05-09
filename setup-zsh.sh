@@ -37,8 +37,6 @@ backup ${HOME}/.zshrc
 backup ${HOME}/.p10k.zsh
 backup ${HOME}/.ssh/config
 backup ${HOME}/.gitconfig
-backup ${HOME}/.ssh/id_rsa
-backup ${HOME}/.ssh/id_ras.pub
 
 
 ln -s ${DIR}/.zshrc .zshrc
