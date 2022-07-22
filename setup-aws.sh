@@ -24,4 +24,8 @@ su - deyaochen -c "curl https://github.com/DE0CH.keys > /home/deyaochen/.ssh/aut
 su - deyaochen -c "git clone https://github.com/DE0CH/dotfiles.git /home/deyaochen/dotfiles"
 usermod -aG sudo deyaochen
 
+curl -fsSL https://test.docker.com -o test-docker.sh
+sh test-docker.sh
+usermod -aG docker deyaochen
+
 su deyaochen -s /home/deyaochen/dotfiles/setup-zsh.sh
