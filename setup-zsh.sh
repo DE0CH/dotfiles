@@ -39,4 +39,3 @@ backup ${HOME}/.p10k.zsh
 
 ln -s ${DIR}/.zshrc .zshrc
 ln -s ${DIR}/.p10k.zsh .p10k.zsh
-l

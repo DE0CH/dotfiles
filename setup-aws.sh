@@ -16,7 +16,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 useradd -m deyaochen
-apt-get update && apt-get install -y zsh
+apt-get update && apt-get install -y zsh git
 chsh -s /bin/zsh deyaochen
 echo "deyaochen ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 test -d /home/deyaochen/.ssh || su - deyaochen -c "mkdir -p /home/deyaochen/.ssh"
