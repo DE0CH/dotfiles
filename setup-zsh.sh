@@ -37,5 +37,5 @@ backup ${HOME}/.zshrc
 backup ${HOME}/.p10k.zsh
 
 
-ln -s ${DIR}/.zshrc .zshrc
-ln -s ${DIR}/.p10k.zsh .p10k.zsh
+curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/.zshrc -o .zshrc
+curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/.p10k.zsh -o .p10k.zsh
