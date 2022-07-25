@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-from ast import Store
 import subprocess
 import json
 import os 
+import argparse
+
+parser = argparse.ArgumentParser("")
+parser.add_argument('arch', choices=["64", "arm"], default="64")
+args = parser.parse_args()
 
 os.chdir(os.path.dirname(__file__))
 
@@ -14,8 +18,12 @@ previous_ec2 = bool(launched_ec2)
 if launched_ec2:
   instance_id = launched_ec2[0]
 else:
-  image_id = "ami-01efa0814106ea343"
-  instance_type = "c5.4xlarge"
+  if args.arch == "64":
+    image_id = "ami-01efa0814106ea343"
+    instance_type = "c5.4xlarge"
+  else:
+    image_id = "ami-01ed943edc33bc944"
+    instance_type = "c6g.4xlarge"
   security_group_id = "sg-44c9992f"
   subnet_id = "subnet-983cd1f1"
   storage = 16
