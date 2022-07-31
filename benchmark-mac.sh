@@ -9,7 +9,7 @@ brew update --force --quiet
 chmod -R go-w "$(brew --prefix)/share/zsh"
 
 brew install python3 make cmake ninja curl git openssl pkg-config & 
-git clone https://github.com/rust-lang/rust.git &
+git clone https://github.com/rust-lang/rust.git && git -C rust submodule update --init --recursive &
 wait 
 
 cd rust 
