@@ -1,0 +1,154 @@
+<h1 id="installing-homebrew-on-the-schools-lab-machines">Proposal to Install
+Homebrew on the school's lab machines</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Usually, updating and installing new packages on a multi-user shared
+computer such as the ones in the lab require admin access and have a lot
+of security and stability concerns. But at the same time, software
+development often needs access to updated and new packages. Striving the
+balance is difficult because contacting the admin can take some time,
+downloading and building packages from source sometimes would just not
+work, and podman can add a lot of system overhead and requires extra
+configurations. Fortunately, we can use a rootless package manager,
+which achieves the perfect balance between user control and the security
+of the system. Therefore, I would like to propose that we install
+homebrew, a package manager, on the lab machines.</p>
+<p>Using homebrew does not require any privileged access to the host
+computer. It works by installing binaries in a custom location, or
+builds them from source, linking the package together and modifying the
+<code>PATH</code>. Another advantage of using homebrew is that it is
+completely optional, as the user can choose to opt in by adding a few
+lines of configuration (technical details will be explored later),
+otherwise there is no change to the behavior of the system. This means
+that homebrew would not replace or conflict with any other package
+manager - nothing will break and the security and stability of the
+system will not be compromised at all. Homebrew is also extremely user
+friendly because if the user chooses to use homebrew, it works
+completely transparently to them: they can just, for example, run
+<code>brew install python3</code> to install a newer version of python
+and run it with <code>python3</code> with no extra steps. Provided that
+users play nicely with each other, we can let them share the same
+library of packages and manage the update and installation
+collectively.</p>
+<h2 id="technical-overview">Technical Overview</h2>
+<p>By default, homebrew stores everything in
+<code>/home/linuxbrew/.linuxbrew</code> (called the homebrew prefix) and
+uses <code>/tmp</code> as a temporary build directory. Creating the
+<code>/home/linuxbrew</code> directory, and giving write permission to
+whoever is using homebrew is the only time when privileged access is
+required. Homebrew can also be installed in other directories as well
+(such as a user's home directory) but that is not recommended because
+packages would have to be built from source, and the packages are not
+rigorously tested to work in this configuration (though they should just
+work almost all the time).</p>
+<p>Although homebrew is not designed to be used by multiple users (most
+packages managers are not), it can be as long as the users using it have
+read and write access to the homebrew prefix. However, just giving
+everyone write permission is not ideal because among other things,
+whoever installs a package would own the files and directories of the
+newly installed package, making it hard for other people to use and
+update the package. A solution for this problem is to create a user, say
+<code>linuxbrew</code>, that everyone can login to and manage the
+homebrew packages. This can be achieved by giving authorized users and
+groups to switch to the user with sudo.</p>
+<p>After the installation is complete, users who want to use homebrew
+can modify their environment variable including path, and adding a alias
+to execute <code>brew</code> as <code>linuxbrew</code> when they type
+<code>brew</code> in the terminal.</p>
+<h2 id="example-installation-procedure">Example Installation
+Procedure</h2>
+<p>The exact installation procedure obviously depends on the
+configuration of the system, so I aim to illustrate the steps to install
+homebrew and the caveats in a form that is easily adaptable to different
+situations.</p>
+<ol type="1">
+<li>Create a new user named <code>linuxbrew</code>, making sure it uses
+<code>bash</code> (instead of <code>sh</code>) as the login shell. In my
+testing, <code>sh</code> would not work for some reason but I am not
+sure why.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">useradd</span> <span class="at">-m</span> linuxbrew <span class="at">-s</span> /bin/bash</span></code></pre></div>
+<ol start="2" type="1">
+<li>Run the installation script <a
+href="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</a>
+as <code>linuxbrew</code> with the environmental variable
+<code>NONINTERACTIVE=1</code>. Sudoers and users except for root who
+have write access to <code>/home/linuxbrew</code> can also run it.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">NONINTERACTIVE</span><span class="op">=</span>1 <span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Change the ownership of everything under (and including)
+<code>/home/linuxbrew</code> to <code>linuxbrew:linuxbrew</code> if not
+done so already. Also make sure <code>linuxbrew</code> has write
+permission, which should be should be the case if you have run the
+script.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> linuxbrew /home/linuxbrew</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chgrp</span> <span class="at">-R</span> linuxbrew /home/linuxbrew</span></code></pre></div>
+<ol start="4" type="1">
+<li>Allow authorized users to login to act as <code>linuxbrew</code>
+with sudo. n.b. it is not enough to simply allow the user to run the
+brew executable because sudo by default runs the command with
+<code>sh</code> but homebrew needs <code>bash</code> to work. This can
+be achieved by adding a line to <code>/etc/sudoers</code>.</li>
+</ol>
+<pre><code>%students ALL=(linuxbrew:linuxbrew) NOPASSWD:ALL</code></pre>
+<ol start="5" type="1">
+<li>Give everyone read and execute permission to
+<code>/home/linuxbrew</code> and
+<code>/home/linuxbrew/.linuxbrew</code>, so they can use the install
+packages as their own user. It is not recommended to instead add
+everyone to the <code>linuxbrew</code> group because people can
+inadvertently write into the <code>.linuxbrew</code> directory with
+files owned by them, for example with <code>pip3 install</code>.</li>
+</ol>
+<pre><code>chmod a+rx /home/linuxbrew /home/linuxbrew/.linuxbrew</code></pre>
+<p>Once homebrew is installed and configured, the user can opt into
+using homebrew by adding the following two lines to their
+<code>~/.profile</code>. The first line puts the exports brew's
+environment variable including a modified path that includes the
+homebrew bin. The second line makes it more transparent for users to use
+homebrew.</p>
+<pre><code>eval &quot;$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)&quot;
+alias brew=&#39;sudo -iu linuxbrew /home/linuxbrew/.linuxbrew/bin/brew&#39;</code></pre>
+<p>The <code>-i</code> option in sudo (in combination with setting
+<code>bash</code> as <code>linuxbrew</code>'s login shell) is important
+because without it, the command uses <code>sh</code>, with which
+homebrew will not work properly.</p>
+<p>It is also important to use the absolute path for homebrew in the
+command because the homebrew bin is not in the <code>PATH</code> of
+<code>linuxbrew</code>.</p>
+<h2 id="security-consideration">Security Considerations</h2>
+<p>Installing homebrew does not change the system in any way and will
+not affect anything not using homebrew because everything is contained
+in the homebrew prefix and it will not be used by default.</p>
+<p>There are concerns with multiple user sharing the same installation
+of homebrew. The usability of homebrew depends on people respecting each
+other. If someone does not play nicely, at best people's code will break
+before someone manages to fix it and at worst some malicious actor can
+replace packages with malicious code to steal data. However, since
+everyone using the system is in the school and people are generally
+quite nice (we allow people to share cpu time without a quota system), I
+am confident that the installation of homebrew will be properly
+maintained by the community.</p>
+<h2 id="personal-homebrew">Personal Homebrew</h2>
+<p>The one last concern it that homebrew packages can modified and
+updated by anyone. This usually doesn't cause a problem because most
+packages are fairly backward compatible. But for any snowflake or legacy
+application that breaks easily, there is always podman available.
+Alternatively, each user can choose to install their own copies of
+homebrew in their home folder, though they have to build packages from
+source or rely on an experimental feature by setting
+<code>HOMEBREW_RELOCATE_BUILD_PREFIX</code> to the installation path of
+homebrew.</p>
+<h2 id="reference">Reference</h2>
+<ol type="1">
+<li><a
+href="https://www.codejam.info/2021/11/homebrew-multi-user.html">https://www.codejam.info/2021/11/homebrew-multi-user.html</a></li>
+<li><a
+href="https://docs.brew.sh/Installation">https://docs.brew.sh/Installation</a></li>
+<li><a
+href="https://docs.brew.sh/Homebrew-on-Linux">https://docs.brew.sh/Homebrew-on-Linux</a></li>
+</ol>

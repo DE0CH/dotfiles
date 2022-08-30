@@ -26,7 +26,7 @@ else:
     instance_type = "c6g.4xlarge"
   security_group_id = "sg-44c9992f"
   subnet_id = "subnet-983cd1f1"
-  storage = 16
+  storage = 64
   volumes = [{
     "DeviceName": "/dev/xvda",
     "Ebs": {
