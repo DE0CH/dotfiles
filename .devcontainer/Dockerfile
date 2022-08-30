@@ -1,7 +1,7 @@
 FROM archlinux:latest
 
 RUN pacman -Sy --noconfirm archlinux-keyring
-RUN pacman -Syu --noconfirm git base-devel sudo zsh
+RUN pacman -Syu --noconfirm git base-devel sudo zsh thefuck
 RUN echo "vscode ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 ARG UNAME=vscode
