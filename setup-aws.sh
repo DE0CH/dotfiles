@@ -24,14 +24,4 @@ su - deyaochen -c "curl https://github.com/DE0CH.keys > /home/deyaochen/.ssh/aut
 su - deyaochen -c "git clone https://github.com/DE0CH/dotfiles.git /home/deyaochen/dotfiles"
 usermod -aG sudo deyaochen
 
-curl -fsSL https://test.docker.com -o test-docker.sh
-sh test-docker.sh
-usermod -aG docker deyaochen
-
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-apt update
-apt install gh
-
 su deyaochen -s /home/deyaochen/dotfiles/setup-zsh.sh
