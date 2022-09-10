@@ -2,7 +2,7 @@ FROM alpine:latest
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 RUN apk update
-RUN apk add git sudo zsh thefuck bash curl
+RUN apk add git sudo zsh thefuck bash curl htop
 RUN echo "vscode ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN adduser -D -s /bin/zsh vscode 
