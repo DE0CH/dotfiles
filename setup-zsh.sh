@@ -17,7 +17,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
-cd ${HOME}
+cd "${HOME}"
 
 backup () {
   FILE=$1
@@ -29,12 +29,12 @@ backup () {
     FILE_REL=$(realpath --relative-to="${HOME}" "${FILE}")
     BACKUP_REL=$(realpath --relative-to="${HOME}" "${BACKUP}")
     echo "~/${FILE_REL} exists, moving it to ~/${BACKUP_REL}"
-    mv ${FILE} ${BACKUP}
+    mv "${FILE}" "${BACKUP}"
   fi 
 }
 
-backup ${HOME}/.zshrc
-backup ${HOME}/.p10k.zsh
+backup "${HOME}/.zshrc"
+backup "${HOME}/.p10k.zsh"
 
 
 curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/.zshrc -o .zshrc
