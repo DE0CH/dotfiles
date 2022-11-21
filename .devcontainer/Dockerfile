@@ -10,6 +10,7 @@ RUN adduser -D -s /bin/zsh vscode
 USER vscode 
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/setup-zsh.sh)"
 RUN echo 'eval $(thefuck --alias)' >> /home/vscode/.zshrc
+RUN echo 'export LC_ALL=C' >> /home/vscode/.zshenv
 WORKDIR /home/vscode
 
 USER root
