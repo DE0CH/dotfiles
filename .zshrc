@@ -109,3 +109,6 @@ source "$ZSH/oh-my-zsh.sh"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export GPG_TTY=$TTY
 alias gs='echo "hi" | gpg --clear-sign > /dev/null'
+export EDTIRO=vim
+export LOCAL_PREFIX="$HOME/.local"
+export PATH="$LOCAL_PREFIX/bin:$PATH"
