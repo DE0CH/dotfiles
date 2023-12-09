@@ -1,6 +1,3 @@
-# IMPORTANT
-If you have stumbled across this and you are not me (the author), please DO NOT run the script. Among many other dangerous things, it will add my ssh public keys to your `authorized_keys`. 
-
 # ZSH
 
 Install zsh and then 
@@ -9,9 +6,4 @@ Install zsh and then
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/setup-zsh.sh)"
 ```
 
-# Benchmark
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/DE0CH/dotfiles/master/benchmark-mac.sh)" | tee benchlog.txt
-```
 
