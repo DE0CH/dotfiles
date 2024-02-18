@@ -1,87 +1,17 @@
 {
     "terminal.integrated.fontFamily": "'MesloLGM NF', 'MesloLGS NF', 'MesloLGM Nerd Font', Menlo, Monaco, Courier, 'Courier New', monospace",
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
-        },
-        "Command Prompt": {
-            "path": [
-                "${env:windir}\\Sysnative\\cmd.exe",
-                "${env:windir}\\System32\\cmd.exe"
-            ],
-            "args": [],
-            "icon": "terminal-cmd"
-        },
-        "Git Bash": {
-            "source": "Git Bash"
-        },
-        "PowerShell 7": {
-            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-        },
-        "Cygwin": {
-            "path": "C:\\cygwin64\\bin\\zsh.exe"
-        },
-    },
-    "terminal.integrated.defaultProfile.windows": "PowerShell 7",
-    "powershell.promptToUpdatePowerShell": false,
     "workbench.colorTheme": "Visual Studio Dark",
-    "remote.SSH.remotePlatform": {
-        "ferry": "linux",
-        "sta": "linux",
-        "sta16": "linux",
-        "Z4": "linux",
-        "aws2": "linux",
-        "eno": "linux",
-        "dev": "linux",
-        "shrimp": "linux",
-        "dyn540.dev.netcraft.com": "linux",
-        "dev2": "linux"
-    },
     "vim.handleKeys": {
         "<C-f>": false,
         "<C-x>": false,
         "<C-a>": false,
         "<C-c>": false,
-        "<C-w>": false,
-        "<C-p>": false
     },
     "editor.accessibilitySupport": "off",
     "editor.autoClosingBrackets": "never",
-    "C_Cpp.default.compilerPath": "C:\\cygwin64\\bin\\gcc.exe",
-    "git.autofetch": true,
-    "git.confirmSync": false,
-    "cSpell.userWords": [
-        "grapher",
-        "subarrays"
-    ],
-    "jupyter.askForKernelRestart": false,
     "window.menuBarVisibility": "hidden",
-    "r.lsp.diagnostics": false,
     "editor.autoClosingQuotes": "never",
-    "editor.rulers": [
-        80,
-        120
-    ],
-    "svelte.enable-ts-plugin": true,
-    "svelte.plugin.svelte.note-new-transformation": false,
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "r.rterm.mac": "/opt/homebrew/bin/radian",
     "git.openRepositoryInParentFolders": "never",
-    "r.rterm.linux": "/home/vscode/.local/bin/radian",
-    "editor.inlineSuggest.enabled": true,
-    "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-        "markdown": true,
-        "scminput": false,
-        "yaml": false
-    },
-    "workbench.editorAssociations": {
-        "*.pdf": "analyticsignal.preview-pdf"
-    },
-    "files.autoSave": "off",
-    "editor.fontFamily": "'MesloLGM NF', 'MesloLGS NF', Menlo, Monaco, Courier, 'Courier New', monospace"
+    "editor.fontFamily": "'MesloLGM NF', 'MesloLGS NF', Menlo, Monaco, Courier, 'Courier New', monospace",
+    "git.autofetch": true
 }
