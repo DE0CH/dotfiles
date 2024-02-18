@@ -13,5 +13,6 @@
     "editor.autoClosingQuotes": "never",
     "git.openRepositoryInParentFolders": "never",
     "editor.fontFamily": "'MesloLGM NF', 'MesloLGS NF', Menlo, Monaco, Courier, 'Courier New', monospace",
-    "git.autofetch": true
+    "git.autofetch": true,
+    "git.confirmSync": false
 }
